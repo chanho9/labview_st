@@ -37,5 +37,41 @@ def makeFactorsMatrix(name, factors):
         for i in combinationN:
                 matrixN[numF*2+1+ii] = i[0] + "*" + i[1];
                 ii+=1;        
-        return (matrixF.tolist(), matrixN)
-        
+        return (matrixF.tolist(), matrixN);
+
+
+## basic statistics...
+
+def stdvar(arr):
+        ans1 = np.mean(arr);
+        ans2 = np.std(arr);
+        ans3 = np.var(arr);
+        return (ans1, ans2, ans3);
+
+#나중에 받는 타입에 상관없이 동작하게 변경
+#https://medium.com/human-in-a-machine-world/mae-and-rmse-which-metric-is-better-e60ac3bde13d
+#https://mechamath.tistory.com/entry/4-%EC%98%A4%EC%B0%A8Error
+def errCal(typeIndex, predictions, targets):
+        ans1=0;
+        ans2=np.array([0,0]);
+        predictions = np.array(predictions)
+        targets = np.array(targets)
+        if typeIndex==0: # Root mean squared error
+                ans1 = np.sqrt(((predictions - targets) ** 2).mean());
+        elif typeIndex==1: # Mean Absolute Error
+                ans1 = ((predictions - targets) ** 2).mean();
+        elif typeIndex==2: # Relative True Error + RMSE
+                ans1= np.sqrt(((predictions - targets)/targets ** 2).mean());
+        elif typeIndex==3: # Approximate error
+                ans1 = abs((predictions[-1]-predictions[-2])/predictions[-1])
+                ans2 = (predictions[:-1]-predictions[1:])/predictions[1:];
+                ans2 = np.array([abs(number) for number in ans2]);
+        else:
+                pass;
+        return (ans1, ans2.tolist())
+
+def covariance(x):
+        ans1 = np.cov(x);
+        ans2 = [np.mean(row) for row in x]
+        return (ans1.tolist(), ans2);
+                
