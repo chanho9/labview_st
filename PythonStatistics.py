@@ -74,4 +74,14 @@ def covariance(x):
         ans1 = np.cov(x);
         ans2 = [np.mean(row) for row in x]
         return (ans1.tolist(), ans2);
+
+def correlationCoef(x,y):
+        x = np.array(x);
+        y = np.array(y);
+        ans = np.corrcoef(x,y);
+        return ans.tolist();
+
+# 정규성 검정
+# https://namyoungkim.github.io/statistics/2017/09/14/probability/
+# https://rfriend.tistory.com/tag/%EB%8B%A8%EC%9D%BC%20%EB%AA%A8%EC%A7%91%EB%8B%A8%20%EB%B6%84%ED%8F%AC%EC%9D%98%20%EC%A0%95%EA%B7%9C%EC%84%B1%20%EA%B2%80%EC%A0%95
                 
